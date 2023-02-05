@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card p-3">
-                    <form action="{{route('students.save')}}" method="post">
+                    <form action="{{route('students.store')}}" method="post">
                         @csrf
                         <div class="form-group mb-3">
                             <label for="">Name</label>

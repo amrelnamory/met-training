@@ -14,6 +14,12 @@
                         </div>
                     @endif
 
+                    <a class="btn btn-primary mb-4" href="{{route('students.create')}}">Add New Student</a>
+
+                    @if(session('success'))
+                       <div class="alert alert-success">{{session('success')}}</div> 
+                    @endif
+
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -23,6 +29,7 @@
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Age</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,6 +42,20 @@
                                     <td>{{ $student->email }}</td>
                                     <td>{{ $student->address }}</td>
                                     <td>{{ $student->age }}</td>
+                                    <td>
+                                        <a class="btn m-1 btn-info" href="{{route('students.edit',$student->id)}}">Edit</a>
+
+                                        <a class="btn m-1 btn-success" href="{{route('students.show',$student->id)}}">Show</a>
+
+                                        <form action="{{route('students.destroy',$student->id)}}" method="post">
+                                            @method('delete')
+                                            @csrf
+
+                                            <button class="btn m-1 btn-danger" 
+                                            onclick="return confirm('Are you Sure ?')"
+                                            type="submit">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

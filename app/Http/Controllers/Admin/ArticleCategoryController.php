@@ -43,7 +43,7 @@ class ArticleCategoryController extends Controller
 
         ArticleCategory::create($data);
 
-        return redirect()->route('admin.home')->with('success', 'Article Category has been Saved.');
+        return redirect()->route('admin.article_categories.index')->with('success', 'Article Category has been Saved.');
     }
 
     /**
@@ -52,9 +52,10 @@ class ArticleCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ArticleCategory $article_category)
     {
-        //
+        return view('admin.article_categories.show', compact('article_category'));
+
     }
 
     /**
@@ -63,9 +64,9 @@ class ArticleCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ArticleCategory $article_category)
     {
-        //
+        return view('admin.article_categories.edit', compact('article_category'));
     }
 
     /**
@@ -75,9 +76,15 @@ class ArticleCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ArticleCategory $article_category)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $article_category->update($data);
+
+        return redirect()->route('admin.article_categories.index')->with('success', 'Article Category has been Updated.');
     }
 
     /**
@@ -86,8 +93,11 @@ class ArticleCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ArticleCategory $article_category)
     {
-        //
+        $article_category->delete();
+
+        return redirect()->route('admin.article_categories.index')->with('success', 'Article Category has been Deleted.');
+
     }
 }

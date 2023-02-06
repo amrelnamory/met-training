@@ -1,5 +1,7 @@
 @extends('admin.layouts.master')
 
+@section('title', 'Article Categories | Create')
+
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">

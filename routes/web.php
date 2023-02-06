@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleCategoryController;
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Auth;
@@ -39,4 +40,5 @@ Route::resource('students', StudentController::class);
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::get('/', [AdminController::class, 'index'])->name('home');
     Route::resource('article_categories', ArticleCategoryController::class);
+    Route::resource('articles', ArticleController::class);
 });
